@@ -26,17 +26,17 @@ try {
   }
   writeFileSync(join(temporary, 'package.json'), JSON.stringify({ name: 'package-smoke-consumer', private: true, type: 'module' }));
   run(process.execPath, [npmCli, 'install', '--dry-run=false', '--offline', '--ignore-scripts', '--no-audit', '--no-fund', '--package-lock=false', join(temporary, pack.filename)]);
-  const installed = JSON.parse(readFileSync(join(temporary, 'node_modules/one-click-unsub/package.json'), 'utf8'));
+  const installed = JSON.parse(readFileSync(join(temporary, 'node_modules/@lickgrass/one-click-unsub/package.json'), 'utf8'));
   assert.equal(Object.keys(installed.dependencies ?? {}).length, 0, 'Must remain free of runtime dependencies');
   assert.equal(Object.keys(installed.optionalDependencies ?? {}).length, 0);
   const smoke = `
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-import * as esm from 'one-click-unsub';
-import { expressOneClick } from 'one-click-unsub/express';
+import * as esm from '@lickgrass/one-click-unsub';
+import { expressOneClick } from '@lickgrass/one-click-unsub/express';
 const require = createRequire(import.meta.url);
-const cjs = require('one-click-unsub');
-assert.equal(typeof require('one-click-unsub/express').expressOneClick, 'function');
+const cjs = require('@lickgrass/one-click-unsub');
+assert.equal(typeof require('@lickgrass/one-click-unsub/express').expressOneClick, 'function');
 assert.equal(typeof expressOneClick, 'function');
 const options = { secret: 'synthetic-package-test-secret-at-least-32-characters', baseUrl: 'https://mail.example.com', address: '123 Example Street' };
 for (const api of [esm, cjs]) {
@@ -57,8 +57,8 @@ for (const api of [esm, cjs]) {
   run(process.execPath, ['smoke.mjs']);
   // Resolve shipped declarations from both .mts and .cts, under NodeNext and
   // legacy node resolution (typesVersions). No repository source imports.
-  const fixture = `import { createUnsubscribe, type HandlerOptions, type ListHeaders } from 'one-click-unsub';
-import { expressOneClick } from 'one-click-unsub/express';
+  const fixture = `import { createUnsubscribe, type HandlerOptions, type ListHeaders } from '@lickgrass/one-click-unsub';
+import { expressOneClick } from '@lickgrass/one-click-unsub/express';
 const unsub = createUnsubscribe({ secret: 'synthetic-type-test-secret-at-least-32-characters', baseUrl: 'https://example.com' });
 const callback: HandlerOptions['onUnsubscribe'] = async (payload, ctx) => ({ list: payload.list, oneClick: ctx.oneClick });
 const handler: (request: Request) => Promise<Response> = unsub.handler(callback, { bodyTimeoutMs: 1000, onError: (_error: unknown) => {} });

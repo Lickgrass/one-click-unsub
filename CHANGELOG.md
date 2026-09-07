@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 — 2026-09-07
+
+- Publish under the Lickgrass organization scope as `@lickgrass/one-click-unsub`.
+- Update installation instructions and package checks for the scoped name.
+  Replace the previous `one-click-unsub` dependency and import paths when upgrading.
+- No changes to the public API, implementation, or token format.
+
 ## 0.1.0 — 2026-09-07
 
 Initial public release:

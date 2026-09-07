@@ -1,4 +1,4 @@
-# one-click-unsub
+# @lickgrass/one-click-unsub
 
 RFC 8058 one-click unsubscribe for people who send their own mail. HMAC
 signed tokens, `List-Unsubscribe` headers, Fetch and Express handlers, and
@@ -15,13 +15,17 @@ See [production setup](OPERATIONS.md), [security policy](SECURITY.md), and
 regulatory compliance, or an enterprise support SLA.
 
 ```sh
-npm install one-click-unsub
+npm install @lickgrass/one-click-unsub
 ```
+
+Previously installed `one-click-unsub`? Replace that dependency with
+`@lickgrass/one-click-unsub` and update your import paths, including `/express`.
+The API and token format are unchanged.
 
 ## The five-minute version
 
 ```ts
-import { createUnsubscribe } from 'one-click-unsub';
+import { createUnsubscribe } from '@lickgrass/one-click-unsub';
 
 const unsub = createUnsubscribe({
   secret: process.env.UNSUB_SECRET!,       // random secret; generate as shown below
@@ -56,7 +60,7 @@ and `node:buffer`; see [Cloudflare's compatibility documentation](https://develo
 Express:
 
 ```ts
-import { expressOneClick } from 'one-click-unsub/express';
+import { expressOneClick } from '@lickgrass/one-click-unsub/express';
 // The adapter reads req.body. urlencoded covers Gmail's documented POST; RFC 8058 §3.2
 // also allows multipart/form-data, so mount a multipart parser too if you want
 // ctx.oneClick for those — without one the unsubscribe still runs, but oneClick reads false.
