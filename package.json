@@ -1,6 +1,6 @@
 {
-  "name": "one-click-unsub",
-  "version": "0.1.0",
+  "name": "@lickgrass/one-click-unsub",
+  "version": "0.1.1",
   "description": "RFC 8058 one-click unsubscribe: HMAC tokens, List-Unsubscribe headers, Fetch/Express handlers, and email footers. Zero runtime dependencies.",
   "license": "MIT",
   "author": "Lickgrass (https://lickgrass.com)",
