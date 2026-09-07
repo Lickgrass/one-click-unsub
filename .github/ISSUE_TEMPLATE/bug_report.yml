@@ -1,0 +1,29 @@
+name: Bug report
+description: Report an unexpected behavior with a reproducible example.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For suspected security issues, follow SECURITY.md. Do not include real
+        tokens, signing secrets, or recipient data in this public report.
+  - type: input
+    id: version
+    attributes:
+      label: Package and runtime versions
+      placeholder: one-click-unsub version, Node.js version, framework and adapter
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include minimal code and synthetic inputs that reproduce the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+      description: Include sanitized error output when relevant.
+    validations:
+      required: true

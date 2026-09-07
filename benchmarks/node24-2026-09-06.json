@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "benchmark": "one-click-unsub in-process ESM microbenchmark",
+    "date": "2026-09-06T15:59:33.102Z",
+    "node": "v24.20.0",
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M4 Pro",
+    "sample_count": 5,
+    "base_iterations": 20000,
+    "identities": 128,
+    "token_characters": {
+      "min": 151,
+      "max": 154
+    },
+    "oversized_token_characters": 8193,
+    "body_bytes": 26,
+    "clock": "2026-01-01T00:00:00.000Z",
+    "key_counts": [
+      1,
+      3,
+      65
+    ],
+    "methodology": "One untimed warmup then five sequential samples per workload; median elapsed sample determines throughput and amortized microseconds/op. No explicit GC. Codec and token fixture setup are excluded.",
+    "limitations": "No network, database, concurrency, or end-to-end latency measurement. Fetch timing includes Request construction, a status check, form parsing, token verification, Response construction, and callback instrumentation. Oversized rejection may be dominated by loop overhead."
+  },
+  "results": [
+    {
+      "workload": "mint, 1 key",
+      "iterations_per_sample": 20000,
+      "warmup_iterations": 2000,
+      "median_ops_per_second": 124955,
+      "median_sample_us_per_op": 8.003,
+      "sample_ms": [
+        167.397,
+        158.848,
+        157.812,
+        160.454,
+        160.057
+      ]
+    },
+    {
+      "workload": "verify valid, 1 key",
+      "iterations_per_sample": 20000,
+      "warmup_iterations": 2000,
+      "median_ops_per_second": 106307,
+      "median_sample_us_per_op": 9.407,
+      "sample_ms": [
+        181.813,
+        181.317,
+        188.838,
+        188.134,
+        189.671
+      ]
+    },
+    {
+      "workload": "verify forged signature, 1 key",
+      "iterations_per_sample": 20000,
+      "warmup_iterations": 2000,
+      "median_ops_per_second": 114131,
+      "median_sample_us_per_op": 8.762,
+      "sample_ms": [
+        175.238,
+        170.277,
+        177.488,
+        173.052,
+        175.698
+      ]
+    },
+    {
+      "workload": "reject oversized token, 1 key",
+      "iterations_per_sample": 20000,
+      "warmup_iterations": 2000,
+      "median_ops_per_second": 180790960,
+      "median_sample_us_per_op": 0.006,
+      "sample_ms": [
+        0.18,
+        0.139,
+        0.095,
+        0.105,
+        0.111
+      ]
+    },
+    {
+      "workload": "verify oldest key, 2 previous + current",
+      "iterations_per_sample": 6667,
+      "warmup_iterations": 666,
+      "median_ops_per_second": 38760,
+      "median_sample_us_per_op": 25.8,
+      "sample_ms": [
+        166.883,
+        173.416,
+        172.787,
+        170.727,
+        172.008
+      ]
+    },
+    {
+      "workload": "verify oldest key, 64 previous + current",
+      "iterations_per_sample": 308,
+      "warmup_iterations": 50,
+      "median_ops_per_second": 1866,
+      "median_sample_us_per_op": 535.83,
+      "sample_ms": [
+        155.515,
+        162.042,
+        165.036,
+        166.612,
+        165.238
+      ]
+    },
+    {
+      "workload": "verify forged signature, 64 previous + current",
+      "iterations_per_sample": 308,
+      "warmup_iterations": 50,
+      "median_ops_per_second": 1863,
+      "median_sample_us_per_op": 536.866,
+      "sample_ms": [
+        155.093,
+        162.263,
+        165.497,
+        165.355,
+        170.857
+      ]
+    },
+    {
+      "workload": "decorate, headers + mailto + HTML/text footer",
+      "iterations_per_sample": 10000,
+      "warmup_iterations": 1000,
+      "median_ops_per_second": 76594,
+      "median_sample_us_per_op": 13.056,
+      "sample_ms": [
+        130.558,
+        130.818,
+        130.328,
+        131.761,
+        129.68
+      ]
+    },
+    {
+      "workload": "Fetch POST, form parsing + instrumented no-op callback",
+      "iterations_per_sample": 1000,
+      "warmup_iterations": 100,
+      "median_ops_per_second": 47337,
+      "median_sample_us_per_op": 21.125,
+      "sample_ms": [
+        29.321,
+        22.328,
+        21.125,
+        20.714,
+        20.139
+      ]
+    }
+  ]
+}
